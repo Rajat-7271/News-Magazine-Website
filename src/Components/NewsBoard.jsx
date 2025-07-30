@@ -7,12 +7,10 @@ const NewsBoard = ({ category }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        document.title = `${category.charAt(0).toUpperCase() + category.slice(1)} - NewsMag`;
-
         const fetchData = async () => {
             setLoading(true);
             try {
-                const url = `/api/news?category=${category}`;
+                let url = `/api/news?category=${category}`;  // <-- THIS IS IMPORTANT
                 const response = await fetch(url);
                 const data = await response.json();
                 setArticles(data.articles || []);
@@ -23,9 +21,9 @@ const NewsBoard = ({ category }) => {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, [category]);
+
 
     return (
         <div>
