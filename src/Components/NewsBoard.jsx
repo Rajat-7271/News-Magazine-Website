@@ -8,9 +8,10 @@ const NewsBoard = ({ category }) => {
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log("Fetching news for category:", category);  // <-- Correct place
             setLoading(true);
             try {
-                let url = `/api/news?category=${category}`;  // <-- THIS IS IMPORTANT
+                let url = `/api/news?category=${category}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 setArticles(data.articles || []);
@@ -21,8 +22,9 @@ const NewsBoard = ({ category }) => {
                 setLoading(false);
             }
         };
-        fetchData();
+        fetchData();  // <-- Call function with no params
     }, [category]);
+
 
 
     return (
