@@ -3,7 +3,9 @@
 
 export async function handler(event, context) {
   const category = event.queryStringParameters.category || 'general'; // Default category
-  const apiKey = process.env.VITE_API_KEY;
+
+  // Try both Netlify Environment Variable and .env (Vite) variable
+  const apiKey = process.env.NEWS_API_KEY || process.env.VITE_API_KEY;
 
   if (!apiKey) {
     return {
