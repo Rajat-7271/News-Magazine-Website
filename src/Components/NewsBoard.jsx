@@ -12,7 +12,7 @@ const NewsBoard = ({ category }) => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let url = `/api/news?category=${category}`;
+                const url = `/api/news?category=${category}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 setArticles(data.articles || []);
