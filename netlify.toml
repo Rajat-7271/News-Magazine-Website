@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = ".netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[dev]
+  functions = "netlify/functions"
+  port = 8888
+
+[context.production.environment]
+  VITE_API_KEY = "0dc9a693ac8140fea379d8eff0150a6d"
