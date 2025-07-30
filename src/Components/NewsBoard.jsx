@@ -8,13 +8,17 @@ const NewsBoard = ({ category }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("Fetching news for category:", category);  // <-- Correct place
             setLoading(true);
             try {
-                let url = `/api/news?category=${category}`;
+                let url = '/.netlify/functions/news?category=' + category;
                 const response = await fetch(url);
                 const data = await response.json();
-                setArticles(data.articles || []);
+                console.log("Fetched Data:", data);  // <-- Add this to debug
+                if (data && data.articles && data.articles.length > 0) {
+                    setArticles(data.articles);
+                } else {
+                    setArticles([]);
+                }
             } catch (error) {
                 console.error("Failed to fetch news:", error);
                 setArticles([]);
@@ -22,10 +26,8 @@ const NewsBoard = ({ category }) => {
                 setLoading(false);
             }
         };
-        fetchData();  // <-- Call function with no params
+        fetchData();
     }, [category]);
-
-
 
     return (
         <div>
