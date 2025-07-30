@@ -1,0 +1,102 @@
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInMoveUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInMoveUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#customNavbar {
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: white;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 60%;
+}
+
+.active-link {
+    position: relative;
+    color: #ff416c !important;
+}
+
+.active-link::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+}
+
+
+
+.news-card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover {
+    transform: scale(1.05);
+}
+
+.brand-badge {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: inline-block;
+    animation: pulseAnimation 2s infinite ease-in-out;
+}
+
+@keyframes pulseAnimation {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 75, 43, 0.7);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px 5px rgba(255, 75, 43, 0.4);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 75, 43, 0.7);
+    }
+}

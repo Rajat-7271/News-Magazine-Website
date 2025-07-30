@@ -1,29 +1,50 @@
 import { useEffect, useState } from "react";
 import NewsItem from "./NewsItem";
+import Loader from "./Loader";
 
 const NewsBoard = ({ category }) => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true); // Start loading
-        let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${import.meta.env.VITE_API_KEY}`;
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                setArticles(data.articles);
-                setLoading(false); // Stop loading after data fetched
-            });
+        document.title = `${category.charAt(0).toUpperCase() + category.slice(1)} - NewsMag`;
+
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${import.meta.env.VITE_API_KEY}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                setArticles(data.articles || []);
+            } catch (error) {
+                console.error("Failed to fetch news:", error);
+                setArticles([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
     }, [category]);
 
     return (
         <div>
             <h2 className="text-center">Latest <span className="badge bg-danger">News</span></h2>
+
             {loading ? (
-                <h4 className="text-center">Loading...</h4>
+                <Loader />
+            ) : articles.length === 0 ? (
+                <h5 className="text-center text-warning">No articles found for {category}.</h5>
             ) : (
                 articles.map((news, index) => (
-                    <NewsItem key={index} title={news.title} description={news.description} src={news.urlToImage} url={news.url} />
+                    <NewsItem
+                        key={index}
+                        index={index}
+                        title={news.title}
+                        description={news.description}
+                        src={news.urlToImage}
+                        url={news.url}
+                    />
                 ))
             )}
         </div>
