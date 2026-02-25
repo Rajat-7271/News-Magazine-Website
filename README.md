@@ -58,7 +58,7 @@ A sleek, modern **News Magazine web application** built using **React**, **Vite*
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/news-mag.git
+   git clone https://github.com/Rajat-7271/news-mag.git
    cd news-mag
    ```
 2. Install dependencies:
